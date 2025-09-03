@@ -1,0 +1,122 @@
+{
+  "b00b35182fb2f9b008e7bf4e4a13d746503883dc": [
+    {
+      "file_path": "/Users/admin/Desktop/SHA10-Test/securehash_project/benchmark_data/test_files/test_1kb_random.txt",
+      "timestamp": null,
+      "file_size": null,
+      "collided": false
+    }
+  ],
+  "adaacf0c75a08ab9736249d1fd6f6d51627b621f": [
+    {
+      "file_path": "/Users/admin/Desktop/SHA10-Test/securehash_project/benchmark_data/test_files/test_1kb_repeat.txt",
+      "timestamp": null,
+      "file_size": null,
+      "collided": false
+    }
+  ],
+  "4852b85da9cc87cfedb2853be7b72ebdc545ebd9": [
+    {
+      "file_path": "/Users/admin/Desktop/SHA10-Test/securehash_project/benchmark_data/test_files/test_1kb_sequential.txt",
+      "timestamp": null,
+      "file_size": null,
+      "collided": false
+    }
+  ],
+  "48992b0258db4e66f41414ce968bbd1d9d216d29": [
+    {
+      "file_path": "/Users/admin/Desktop/SHA10-Test/securehash_project/benchmark_data/test_files/test_10kb_random.txt",
+      "timestamp": null,
+      "file_size": null,
+      "collided": false
+    }
+  ],
+  "489eb74a8680e4900852c49a7124c39adb147fcb": [
+    {
+      "file_path": "/Users/admin/Desktop/SHA10-Test/securehash_project/benchmark_data/test_files/test_10kb_repeat.txt",
+      "timestamp": null,
+      "file_size": null,
+      "collided": false
+    }
+  ],
+  "c98b1c305a0edd4dd5456d2d8c320f1318d432f7": [
+    {
+      "file_path": "/Users/admin/Desktop/SHA10-Test/securehash_project/benchmark_data/test_files/test_10kb_sequential.txt",
+      "timestamp": null,
+      "file_size": null,
+      "collided": false
+    }
+  ],
+  "75243ea9a0300693193c6867278626f618d53363": [
+    {
+      "file_path": "/Users/admin/Desktop/SHA10-Test/securehash_project/benchmark_data/test_files/test_100kb_random.txt",
+      "timestamp": null,
+      "file_size": null,
+      "collided": false
+    }
+  ],
+  "ed30792c5d9aceeca37456f98c6976eb2c5822b6": [
+    {
+      "file_path": "/Users/admin/Desktop/SHA10-Test/securehash_project/benchmark_data/test_files/test_100kb_repeat.txt",
+      "timestamp": null,
+      "file_size": null,
+      "collided": false
+    }
+  ],
+  "8bd008f3acaa86d8a95a42dcd46a2669712adc7c": [
+    {
+      "file_path": "/Users/admin/Desktop/SHA10-Test/securehash_project/benchmark_data/test_files/test_100kb_sequential.txt",
+      "timestamp": null,
+      "file_size": null,
+      "collided": false
+    }
+  ],
+  "5f91c9ecc55ae9d9804bf76e6ccf0e444e88c3de": [
+    {
+      "file_path": "/Users/admin/Desktop/SHA10-Test/securehash_project/benchmark_data/test_files/test_1000kb_random.txt",
+      "timestamp": null,
+      "file_size": null,
+      "collided": false
+    }
+  ],
+  "af0507a78502a45f18e4e3cb286d4564869d64a6": [
+    {
+      "file_path": "/Users/admin/Desktop/SHA10-Test/securehash_project/benchmark_data/test_files/test_1000kb_repeat.txt",
+      "timestamp": null,
+      "file_size": null,
+      "collided": false
+    }
+  ],
+  "533e8b1b87a8cb24ab0085b210686fbbda64837d": [
+    {
+      "file_path": "/Users/admin/Desktop/SHA10-Test/securehash_project/benchmark_data/test_files/test_1000kb_sequential.txt",
+      "timestamp": null,
+      "file_size": null,
+      "collided": false
+    }
+  ],
+  "d56fce2abf8dc705a1ebb2ffd86a1ca8f2454fde": [
+    {
+      "file_path": "/Users/admin/Desktop/SHA10-Test/securehash_project/benchmark_data/test_files/test_10000kb_random.txt",
+      "timestamp": null,
+      "file_size": null,
+      "collided": false
+    }
+  ],
+  "48834a1c40c2c8d0bd95021c9e261277255bde87": [
+    {
+      "file_path": "/Users/admin/Desktop/SHA10-Test/securehash_project/benchmark_data/test_files/test_10000kb_repeat.txt",
+      "timestamp": null,
+      "file_size": null,
+      "collided": false
+    }
+  ],
+  "7232816622f926892a537f816ae06bb335f13147": [
+    {
+      "file_path": "/Users/admin/Desktop/SHA10-Test/securehash_project/benchmark_data/test_files/test_10000kb_sequential.txt",
+      "timestamp": null,
+      "file_size": null,
+      "collided": false
+    }
+  ]
+}

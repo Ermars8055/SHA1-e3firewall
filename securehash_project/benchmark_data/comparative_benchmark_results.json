@@ -1,0 +1,248 @@
+[
+  {
+    "timestamp": "2025-09-03 18:54:21",
+    "iterations": 100,
+    "tests": [
+      {
+        "size_kb": 1,
+        "pattern": "random",
+        "sha1": {
+          "time_ms": 0.0009202957153320312,
+          "memory_mb": 0,
+          "throughput_mbs": 1061.1398963730571,
+          "avalanche_effect": 55.00000000000001
+        },
+        "collatz_sha1": {
+          "time_ms": 0.6522774696350098,
+          "memory_mb": 0,
+          "throughput_mbs": 1.4971581044282398,
+          "avalanche_effect": 49.375
+        }
+      },
+      {
+        "size_kb": 1,
+        "pattern": "repeat",
+        "sha1": {
+          "time_ms": 0.0009250640869140625,
+          "memory_mb": 0,
+          "throughput_mbs": 1055.6701030927836,
+          "avalanche_effect": 45.625
+        },
+        "collatz_sha1": {
+          "time_ms": 0.9785985946655273,
+          "memory_mb": 0,
+          "throughput_mbs": 0.9979193770800139,
+          "avalanche_effect": 50.625
+        }
+      },
+      {
+        "size_kb": 1,
+        "pattern": "sequential",
+        "sha1": {
+          "time_ms": 0.0006556510925292969,
+          "memory_mb": 0,
+          "throughput_mbs": 1489.4545454545455,
+          "avalanche_effect": 56.875
+        },
+        "collatz_sha1": {
+          "time_ms": 1.2661385536193848,
+          "memory_mb": 0,
+          "throughput_mbs": 0.7712919705417687,
+          "avalanche_effect": 50.0
+        }
+      },
+      {
+        "size_kb": 10,
+        "pattern": "random",
+        "sha1": {
+          "time_ms": 0.004794597625732422,
+          "memory_mb": 0,
+          "throughput_mbs": 2036.7976131277971,
+          "avalanche_effect": 50.0
+        },
+        "collatz_sha1": {
+          "time_ms": 0.6008791923522949,
+          "memory_mb": 0,
+          "throughput_mbs": 16.252226943938545,
+          "avalanche_effect": 51.87500000000001
+        }
+      },
+      {
+        "size_kb": 10,
+        "pattern": "repeat",
+        "sha1": {
+          "time_ms": 0.004990100860595703,
+          "memory_mb": 0,
+          "throughput_mbs": 1956.9995222169136,
+          "avalanche_effect": 50.625
+        },
+        "collatz_sha1": {
+          "time_ms": 0.9908890724182129,
+          "memory_mb": 0,
+          "throughput_mbs": 9.855416990488656,
+          "avalanche_effect": 46.875
+        }
+      },
+      {
+        "size_kb": 10,
+        "pattern": "sequential",
+        "sha1": {
+          "time_ms": 0.002639293670654297,
+          "memory_mb": 0,
+          "throughput_mbs": 3700.0903342366755,
+          "avalanche_effect": 46.875
+        },
+        "collatz_sha1": {
+          "time_ms": 0.8303213119506836,
+          "memory_mb": 0,
+          "throughput_mbs": 11.761260200653531,
+          "avalanche_effect": 55.625
+        }
+      },
+      {
+        "size_kb": 100,
+        "pattern": "random",
+        "sha1": {
+          "time_ms": 0.04298686981201172,
+          "memory_mb": 0,
+          "throughput_mbs": 2271.7692734331667,
+          "avalanche_effect": 51.87500000000001
+        },
+        "collatz_sha1": {
+          "time_ms": 0.8910465240478516,
+          "memory_mb": 0,
+          "throughput_mbs": 109.59725150642706,
+          "avalanche_effect": 47.5
+        }
+      },
+      {
+        "size_kb": 100,
+        "pattern": "repeat",
+        "sha1": {
+          "time_ms": 0.04285573959350586,
+          "memory_mb": 0,
+          "throughput_mbs": 2278.720445062587,
+          "avalanche_effect": 55.625
+        },
+        "collatz_sha1": {
+          "time_ms": 0.8553457260131836,
+          "memory_mb": 0,
+          "throughput_mbs": 114.17167003941375,
+          "avalanche_effect": 46.25
+        }
+      },
+      {
+        "size_kb": 100,
+        "pattern": "sequential",
+        "sha1": {
+          "time_ms": 0.029325485229492188,
+          "memory_mb": 0,
+          "throughput_mbs": 3330.081300813008,
+          "avalanche_effect": 50.625
+        },
+        "collatz_sha1": {
+          "time_ms": 0.7814574241638184,
+          "memory_mb": 0,
+          "throughput_mbs": 124.96682094292592,
+          "avalanche_effect": 50.0
+        }
+      },
+      {
+        "size_kb": 1000,
+        "pattern": "random",
+        "sha1": {
+          "time_ms": 0.4320096969604492,
+          "memory_mb": 0,
+          "throughput_mbs": 2260.51060166227,
+          "avalanche_effect": 53.75
+        },
+        "collatz_sha1": {
+          "time_ms": 1.0271716117858887,
+          "memory_mb": 0,
+          "throughput_mbs": 950.7296432210608,
+          "avalanche_effect": 60.62499999999999
+        }
+      },
+      {
+        "size_kb": 1000,
+        "pattern": "repeat",
+        "sha1": {
+          "time_ms": 0.4294252395629883,
+          "memory_mb": 0,
+          "throughput_mbs": 2274.115282543278,
+          "avalanche_effect": 51.24999999999999
+        },
+        "collatz_sha1": {
+          "time_ms": 1.1466693878173828,
+          "memory_mb": 0,
+          "throughput_mbs": 851.6513219724378,
+          "avalanche_effect": 42.5
+        }
+      },
+      {
+        "size_kb": 1000,
+        "pattern": "sequential",
+        "sha1": {
+          "time_ms": 0.3297114372253418,
+          "memory_mb": 0,
+          "throughput_mbs": 2961.8702590913363,
+          "avalanche_effect": 53.75
+        },
+        "collatz_sha1": {
+          "time_ms": 1.01515531539917,
+          "memory_mb": 0,
+          "throughput_mbs": 961.9833390873841,
+          "avalanche_effect": 43.125
+        }
+      },
+      {
+        "size_kb": 10000,
+        "pattern": "random",
+        "sha1": {
+          "time_ms": 4.33779239654541,
+          "memory_mb": 0,
+          "throughput_mbs": 2251.289159844828,
+          "avalanche_effect": 58.12500000000001
+        },
+        "collatz_sha1": {
+          "time_ms": 5.181360244750977,
+          "memory_mb": 0,
+          "throughput_mbs": 1884.76086176273,
+          "avalanche_effect": 55.625
+        }
+      },
+      {
+        "size_kb": 10000,
+        "pattern": "repeat",
+        "sha1": {
+          "time_ms": 4.331636428833008,
+          "memory_mb": 0,
+          "throughput_mbs": 2254.4886119703656,
+          "avalanche_effect": 48.75
+        },
+        "collatz_sha1": {
+          "time_ms": 4.956307411193848,
+          "memory_mb": 0,
+          "throughput_mbs": 1970.3428762195588,
+          "avalanche_effect": 44.375
+        }
+      },
+      {
+        "size_kb": 10000,
+        "pattern": "sequential",
+        "sha1": {
+          "time_ms": 3.8681864738464355,
+          "memory_mb": 0,
+          "throughput_mbs": 2524.6003691981496,
+          "avalanche_effect": 54.37499999999999
+        },
+        "collatz_sha1": {
+          "time_ms": 4.508795738220215,
+          "memory_mb": 0,
+          "throughput_mbs": 2165.905391814189,
+          "avalanche_effect": 46.25
+        }
+      }
+    ]
+  }
+]
