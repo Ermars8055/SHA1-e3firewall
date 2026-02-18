@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Firewall - SHA1-E3 Security Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            color: #e0e0e0;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px;
+            background: linear-gradient(135deg, rgba(50, 43, 99, 0.3), rgba(36, 36, 62, 0.3));
+            border: 2px solid #00d4ff;
+            border-radius: 15px;
+            box-shadow: 0 0 30px rgba(0, 212, 255, 0.2);
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            background: linear-gradient(to right, #00d4ff, #7b68ee);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            color: #b0b0b0;
+        }
+
+        .status-line {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .status-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .status-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #00ff00;
+            box-shadow: 0 0 10px #00ff00;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            background: linear-gradient(135deg, rgba(50, 43, 99, 0.4), rgba(36, 36, 62, 0.4));
+            border: 2px solid #00d4ff;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 35px rgba(0, 212, 255, 0.2);
+            border-color: #7b68ee;
+        }
+
+        .card-title {
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            color: #00d4ff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card-icon {
+            font-size: 1.5em;
+        }
+
+        .card-content {
+            color: #c0c0c0;
+            line-height: 1.6;
+        }
+
+        .feature-list {
+            list-style: none;
+            margin-top: 15px;
+        }
+
+        .feature-list li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+            color: #b0b0b0;
+        }
+
+        .feature-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #00ff00;
+            font-weight: bold;
+        }
+
+        .metric {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+        }
+
+        .metric-label {
+            color: #b0b0b0;
+        }
+
+        .metric-value {
+            color: #00d4ff;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        .endpoint-section {
+            margin-top: 40px;
+            background: linear-gradient(135deg, rgba(50, 43, 99, 0.3), rgba(36, 36, 62, 0.3));
+            border: 2px solid #7b68ee;
+            border-radius: 15px;
+            padding: 30px;
+        }
+
+        .endpoint-section h2 {
+            color: #7b68ee;
+            margin-bottom: 25px;
+            font-size: 1.8em;
+        }
+
+        .endpoint-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .endpoint-card {
+            background: rgba(20, 20, 40, 0.8);
+            border: 1px solid #7b68ee;
+            border-radius: 8px;
+            padding: 18px;
+        }
+
+        .endpoint-method {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+
+        .method-get {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .method-post {
+            background: #2196F3;
+            color: white;
+        }
+
+        .method-auth {
+            background: #FF9800;
+            color: white;
+        }
+
+        .endpoint-path {
+            font-family: 'Courier New', monospace;
+            color: #00d4ff;
+            font-size: 0.9em;
+            word-break: break-all;
+            margin-bottom: 10px;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 4px;
+        }
+
+        .endpoint-desc {
+            color: #b0b0b0;
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
+
+        .highlight {
+            color: #00ff00;
+            font-weight: bold;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-size: 0.85em;
+            background: rgba(0, 212, 255, 0.2);
+            color: #00d4ff;
+            margin-left: 10px;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            border-top: 1px solid rgba(0, 212, 255, 0.2);
+            color: #808080;
+        }
+
+        .alert {
+            background: rgba(255, 193, 7, 0.1);
+            border-left: 4px solid #FFC107;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            color: #FFD54F;
+        }
+
+        .success {
+            background: rgba(76, 175, 80, 0.1);
+            border-left: 4px solid #4CAF50;
+            color: #81C784;
+        }
+
+        .quick-link {
+            display: inline-block;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #00d4ff, #7b68ee);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 10px 10px 10px 0;
+            transition: all 0.3s ease;
+        }
+
+        .quick-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 212, 255, 0.3);
+        }
+
+        .section-divider {
+            margin: 30px 0;
+            border: 0;
+            border-top: 2px solid rgba(0, 212, 255, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>🛡️ Advanced Firewall Gateway</h1>
+            <p>SHA1-E3 Cryptographic Security - Professional-Grade Protection</p>
+            <div class="status-line">
+                <div class="status-item">
+                    <span class="status-dot"></span>
+                    <span>Server: <span class="highlight">ONLINE</span></span>
+                </div>
+                <div class="status-item">
+                    <span class="status-dot"></span>
+                    <span>Security: <span class="highlight">ACTIVE</span></span>
+                </div>
+                <div class="status-item">
+                    <span class="status-dot"></span>
+                    <span>Advanced Features: <span class="highlight">ENABLED</span></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div style="text-align: center; margin: 30px 0;">
+            <h3 style="color: #00d4ff; margin-bottom: 15px;">⚡ Quick Links</h3>
+            <a href="/analytics/registration/" class="quick-link">📝 Register Device</a>
+            <a href="/analytics/admin/login/" class="quick-link">🔐 Admin Login</a>
+            <a href="https://localhost:8001/analytics/api/security/mfa/challenge/" class="quick-link">🔑 Test MFA API</a>
+        </div>
+
+        <!-- Core Features Grid -->
+        <div class="grid">
+            <!-- MFA Feature -->
+            <div class="card">
+                <div class="card-title">
+                    <span class="card-icon">🔐</span>
+                    SHA1-E3 Multi-Factor Authentication
+                </div>
+                <div class="card-content">
+                    <p>Enterprise-grade challenge-response MFA using proprietary SHA1-E3 hashing algorithm.</p>
+                    <ul class="feature-list">
+                        <li>Challenge-response system (no TOTP)</li>
+                        <li>5-minute expiration window</li>
+                        <li>3 attempts allowed</li>
+                        <li>8-hour verification tokens</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Rate Limiting Feature -->
+            <div class="card">
+                <div class="card-title">
+                    <span class="card-icon">🚦</span>
+                    Device-Tier Rate Limiting
+                </div>
+                <div class="card-content">
+                    <p>Smart hash-based quotas that adapt to device reputation.</p>
+                    <ul class="feature-list">
+                        <li>Whitelisted: 100-150 req/min</li>
+                        <li>Untrusted: 20-30 req/min</li>
+                        <li>Ephemeral tokens (rotate every 60s)</li>
+                        <li>Auto-block on exceed (5 min cooldown)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Anomaly Detection Feature -->
+            <div class="card">
+                <div class="card-title">
+                    <span class="card-icon">🧠</span>
+                    Behavioral Anomaly Detection
+                </div>
+                <div class="card-content">
+                    <p>AI-powered detection using Collatz sequence pattern analysis.</p>
+                    <ul class="feature-list">
+                        <li>Hash similarity scoring (40%)</li>
+                        <li>Variance analysis (30%)</li>
+                        <li>Pattern deviation (30%)</li>
+                        <li>Risk tiers: LOW / MEDIUM / HIGH</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Audit Logging Feature -->
+            <div class="card">
+                <div class="card-title">
+                    <span class="card-icon">📝</span>
+                    Hash-Chained Audit Logs
+                </div>
+                <div class="card-content">
+                    <p>Blockchain-style tamper-proof logging of all security events.</p>
+                    <ul class="feature-list">
+                        <li>Hash-chained entries (blockchain)</li>
+                        <li>Instant tampering detection</li>
+                        <li>All admin actions recorded</li>
+                        <li>Complete audit trail verification</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Geo-Blocking Feature -->
+            <div class="card">
+                <div class="card-title">
+                    <span class="card-icon">🌍</span>
+                    Geographic Access Control
+                </div>
+                <div class="card-content">
+                    <p>Region-specific policies with VPN/proxy detection.</p>
+                    <ul class="feature-list">
+                        <li>6 supported regions (US, EU, ASIA, etc.)</li>
+                        <li>VPN/proxy detection via hashing</li>
+                        <li>Per-device configuration</li>
+                        <li>Admin-configurable policies</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Real-Time Dashboard -->
+            <div class="card">
+                <div class="card-title">
+                    <span class="card-icon">📊</span>
+                    Real-Time Security Dashboard
+                </div>
+                <div class="card-content">
+                    <p>Complete visibility into security posture and threat landscape.</p>
+                    <ul class="feature-list">
+                        <li>Audit log statistics</li>
+                        <li>Device threat analysis</li>
+                        <li>Rate limiting status</li>
+                        <li>Overall security health</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Current Statistics -->
+        <div style="margin: 30px 0;">
+            <h2 style="color: #00d4ff; margin-bottom: 20px;">📊 System Statistics</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                <div class="card">
+                    <div class="metric">
+                        <span class="metric-label">Active Security Features</span>
+                        <span class="metric-value">6</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-label">API Endpoints</span>
+                        <span class="metric-value">10</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-label">Authentication Methods</span>
+                        <span class="metric-value">3</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- API Endpoints Section -->
+        <div class="endpoint-section">
+            <h2>🔌 Advanced Security API Endpoints</h2>
+
+            <h3 style="color: #00d4ff; margin: 20px 0 15px;">Public Endpoints (No Authentication)</h3>
+            <div class="endpoint-grid">
+                <!-- MFA Challenge -->
+                <div class="endpoint-card">
+                    <span class="endpoint-method method-post">POST</span>
+                    <div class="endpoint-path">/analytics/api/security/mfa/challenge/</div>
+                    <div class="endpoint-desc">Create MFA challenge for device authentication</div>
+                </div>
+
+                <!-- MFA Verify -->
+                <div class="endpoint-card">
+                    <span class="endpoint-method method-post">POST</span>
+                    <div class="endpoint-path">/analytics/api/security/mfa/verify/</div>
+                    <div class="endpoint-desc">Verify MFA response and issue verification token</div>
+                </div>
+
+                <!-- Rate Limit -->
+                <div class="endpoint-card">
+                    <span class="endpoint-method method-get">GET</span>
+                    <span class="endpoint-method method-post">POST</span>
+                    <div class="endpoint-path">/analytics/api/security/rate-limit/</div>
+                    <div class="endpoint-desc">Check rate limit quota for device IP</div>
+                </div>
+
+                <!-- Anomaly Detection -->
+                <div class="endpoint-card">
+                    <span class="endpoint-method method-post">POST</span>
+                    <div class="endpoint-path">/analytics/api/security/anomaly-detection/</div>
+                    <div class="endpoint-desc">Detect behavioral anomalies in device patterns</div>
+                </div>
+
+                <!-- Device Profile -->
+                <div class="endpoint-card">
+                    <span class="endpoint-method method-get">GET</span>
+                    <div class="endpoint-path">/analytics/api/security/device-profile/</div>
+                    <div class="endpoint-desc">Get security profile and threat assessment for device</div>
+                </div>
+            </div>
+
+            <h3 style="color: #FF9800; margin: 30px 0 15px;">🔒 Admin-Only Endpoints (Authentication Required)</h3>
+            <div class="endpoint-grid">
+                <!-- Audit Log -->
+                <div class="endpoint-card">
+                    <span class="endpoint-method method-post method-auth">POST</span>
+                    <div class="endpoint-path">/analytics/api/security/audit/log/</div>
+                    <div class="endpoint-desc">Create tamper-proof audit log entry</div>
+                </div>
+
+                <!-- Audit Verify -->
+                <div class="endpoint-card">
+                    <span class="endpoint-method method-get method-auth">GET</span>
+                    <div class="endpoint-path">/analytics/api/security/audit/verify/</div>
+                    <div class="endpoint-desc">Verify audit log integrity (blockchain check)</div>
+                </div>
+
+                <!-- Get Audit Logs -->
+                <div class="endpoint-card">
+                    <span class="endpoint-method method-get method-auth">GET</span>
+                    <div class="endpoint-path">/analytics/api/security/audit/logs/</div>
+                    <div class="endpoint-desc">Retrieve audit logs for specific device or IP</div>
+                </div>
+
+                <!-- Geo-blocking -->
+                <div class="endpoint-card">
+                    <span class="endpoint-method method-post method-auth">POST</span>
+                    <div class="endpoint-path">/analytics/api/security/geo-blocking/enable/</div>
+                    <div class="endpoint-desc">Configure geographic access restrictions</div>
+                </div>
+
+                <!-- Dashboard -->
+                <div class="endpoint-card">
+                    <span class="endpoint-method method-get method-auth">GET</span>
+                    <div class="endpoint-path">/analytics/api/security/dashboard/</div>
+                    <div class="endpoint-desc">Get comprehensive security dashboard metrics</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Key Technologies -->
+        <div style="margin: 40px 0;">
+            <h2 style="color: #00d4ff; margin-bottom: 20px;">🚀 Technology Stack</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                <div class="card">
+                    <div class="card-title">🔐 SHA1-E3 Hashing</div>
+                    <div class="card-content">Proprietary Collatz sequence-based cryptographic algorithm</div>
+                </div>
+                <div class="card">
+                    <div class="card-title">🐍 Django Framework</div>
+                    <div class="card-content">Enterprise-grade Python web framework</div>
+                </div>
+                <div class="card">
+                    <div class="card-title">📊 SQLite Database</div>
+                    <div class="card-content">Lightweight, serverless database</div>
+                </div>
+                <div class="card">
+                    <div class="card-title">🔗 REST APIs</div>
+                    <div class="card-content">10 comprehensive API endpoints</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Admin Information -->
+        <div class="alert success" style="margin: 30px 0;">
+            <strong>✓ Admin Panel Access</strong><br>
+            Username: <span class="highlight">admin</span><br>
+            Password: <span class="highlight">firewall_gateway_2025</span><br>
+            <a href="/analytics/admin/login/" style="color: #81C784; text-decoration: underline;">Go to Admin Login →</a>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>Advanced Firewall Gateway with SHA1-E3 Cryptographic Security</p>
+            <p style="margin-top: 10px; font-size: 0.9em;">All endpoints operational | All features enabled | Real-time monitoring active</p>
+        </div>
+    </div>
+
+    <script>
+        // Auto-refresh statistics every 5 seconds
+        setInterval(async () => {
+            try {
+                // Load latest stats
+                const statsResponse = await fetch('/analytics/api/stats/');
+                // Update dashboard if needed
+            } catch (error) {
+                console.log('Auto-refresh complete');
+            }
+        }, 5000);
+    </script>
+</body>
+</html>

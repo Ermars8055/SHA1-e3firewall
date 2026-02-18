@@ -4,6 +4,7 @@ Analytics Dashboard URLs
 
 from django.urls import path
 from . import views
+from . import advanced_security_api
 
 app_name = 'analytics'
 
@@ -54,4 +55,32 @@ urlpatterns = [
     path('api/admin/login/', views.admin_login_api, name='api_admin_login'),
     path('api/admin/approve/', views.admin_approve_api, name='api_admin_approve'),
     path('api/admin/reject/', views.admin_reject_api, name='api_admin_reject'),
+
+    # ========== ADVANCED SECURITY ENDPOINTS ==========
+    # MFA endpoints
+    path('api/security/mfa/challenge/', advanced_security_api.create_mfa_challenge_api, name='api_mfa_challenge'),
+    path('api/security/mfa/verify/', advanced_security_api.verify_mfa_challenge_api, name='api_mfa_verify'),
+
+    # Rate limiting endpoints
+    path('api/security/rate-limit/', advanced_security_api.check_rate_limit_api, name='api_rate_limit'),
+
+    # Anomaly detection endpoints
+    path('api/security/anomaly-detection/', advanced_security_api.detect_anomalies_api, name='api_anomaly_detection'),
+    path('api/security/device-profile/', advanced_security_api.get_device_security_profile_api, name='api_device_profile'),
+
+    # Audit logging endpoints
+    path('api/security/audit/log/', advanced_security_api.log_audit_entry_api, name='api_audit_log'),
+    path('api/security/audit/verify/', advanced_security_api.verify_audit_integrity_api, name='api_audit_verify'),
+    path('api/security/audit/logs/', advanced_security_api.get_audit_logs_api, name='api_audit_logs'),
+
+    # Geo-blocking endpoints
+    path('api/security/geo-blocking/enable/', advanced_security_api.enable_geo_blocking_api, name='api_geo_blocking'),
+
+    # Security dashboard
+    path('api/security/dashboard/', advanced_security_api.get_security_dashboard_api, name='api_security_dashboard'),
+
+    # ========== SHA1-E3 ADMIN SESSION ENDPOINTS ==========
+    # Session verification and chain integrity checking
+    path('api/security/admin/session/verify/', advanced_security_api.verify_admin_session_chain_api, name='api_admin_session_verify'),
+    path('api/security/admin/session/info/', advanced_security_api.get_admin_session_info_api, name='api_admin_session_info'),
 ]

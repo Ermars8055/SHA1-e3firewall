@@ -1,0 +1,473 @@
+/* ============================================================================
+   Windows 7 Style Dashboard - Collatz Firewall Analytics
+   ============================================================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', 'Trebuchet MS', sans-serif;
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    color: #333;
+    overflow: hidden;
+    height: 100vh;
+}
+
+/* ============================================================================
+   Windows 7 Style Elements
+   ============================================================================ */
+
+.window {
+    background: linear-gradient(to bottom, #f0f0f0 0%, #e5e5e5 100%);
+    border: 1px solid #999;
+    border-radius: 0;
+    box-shadow:
+        inset 1px 1px 0 rgba(255,255,255,0.8),
+        inset -1px -1px 0 rgba(0,0,0,0.2),
+        0 4px 8px rgba(0,0,0,0.3);
+    margin: 10px;
+    height: calc(100vh - 20px);
+    display: flex;
+    flex-direction: column;
+}
+
+.title-bar {
+    background: linear-gradient(90deg, #0078d7 0%, #1084d7 100%);
+    color: white;
+    padding: 3px 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 24px;
+    font-size: 12px;
+    font-weight: bold;
+    text-shadow: 1px 1px 0 rgba(0,0,0,0.3);
+}
+
+.title-bar-controls {
+    display: flex;
+    gap: 2px;
+}
+
+.btn-minimize, .btn-maximize, .btn-close {
+    width: 16px;
+    height: 16px;
+    background: linear-gradient(135deg, #d3d3d3, #a0a0a0);
+    border: 1px solid #666;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    color: black;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-minimize:hover, .btn-maximize:hover {
+    background: linear-gradient(135deg, #e5e5e5, #b0b0b0);
+}
+
+.btn-close:hover {
+    background: linear-gradient(135deg, #ff6b6b, #cc0000);
+    color: white;
+}
+
+.menu-bar {
+    background: linear-gradient(to bottom, #f0f0f0, #e8e8e8);
+    border-bottom: 1px solid #999;
+    padding: 2px 4px;
+    display: flex;
+    gap: 20px;
+    height: 22px;
+    align-items: center;
+    font-size: 12px;
+}
+
+.menu-item {
+    cursor: pointer;
+    padding: 2px 6px;
+    border-radius: 2px;
+    transition: all 0.2s;
+}
+
+.menu-item:hover {
+    background: linear-gradient(to bottom, #e6f2ff, #d0e8ff);
+    border: 1px solid #0078d7;
+}
+
+.panel {
+    background: linear-gradient(to bottom, #f5f5f5, #f0f0f0);
+    border: 1px solid #999;
+    border-radius: 0;
+    padding: 8px;
+    margin: 6px;
+    box-shadow:
+        inset 1px 1px 0 rgba(255,255,255,0.8),
+        inset -1px -1px 0 rgba(0,0,0,0.1);
+}
+
+.panel-title {
+    background: linear-gradient(to right, #316ac5, #4d7ec5);
+    color: white;
+    padding: 4px 6px;
+    margin: -8px -8px 8px -8px;
+    font-weight: bold;
+    font-size: 12px;
+    border-bottom: 1px solid #999;
+}
+
+.status-bar {
+    background: linear-gradient(to bottom, #f0f0f0, #e0e0e0);
+    border-top: 1px solid #999;
+    border-bottom: 1px solid #dfdfdf;
+    padding: 2px 4px;
+    display: flex;
+    height: 22px;
+    font-size: 11px;
+    align-items: center;
+    gap: 10px;
+}
+
+.status-item {
+    padding: 0 4px;
+    border-right: 1px solid #999;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.status-indicator {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #00aa00;
+    border: 1px solid #006600;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+}
+
+.status-indicator.warning {
+    background: #ffaa00;
+    border-color: #ff6600;
+}
+
+.status-indicator.error {
+    background: #ff3333;
+    border-color: #cc0000;
+}
+
+/* ============================================================================
+   Layout
+   ============================================================================ */
+
+.main-content {
+    flex: 1;
+    display: flex;
+    gap: 6px;
+    overflow: hidden;
+    padding: 4px;
+}
+
+.sidebar {
+    width: 200px;
+    background: linear-gradient(to bottom, #f5f5f5, #f0f0f0);
+    border: 1px solid #999;
+    border-radius: 0;
+    overflow-y: auto;
+    box-shadow: inset 1px 1px 0 rgba(255,255,255,0.8);
+}
+
+.sidebar-item {
+    padding: 8px 12px;
+    border-bottom: 1px solid #d0d0d0;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.sidebar-item:hover {
+    background: linear-gradient(to right, #dfe6f7, #e8ecf5);
+    border-left: 3px solid #0078d7;
+    padding-left: 9px;
+}
+
+.sidebar-item.active {
+    background: linear-gradient(to right, #c5d9f1, #d0e0f5);
+    border-left: 3px solid #0078d7;
+    padding-left: 9px;
+    color: #0078d7;
+    font-weight: bold;
+}
+
+.icon {
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+}
+
+.content-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    overflow: hidden;
+}
+
+/* ============================================================================
+   Dashboard Panels
+   ============================================================================ */
+
+.top-panels {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+    height: 120px;
+}
+
+.stat-panel {
+    background: linear-gradient(to bottom, #f5f5f5, #f0f0f0);
+    border: 1px solid #999;
+    padding: 8px;
+    box-shadow:
+        inset 1px 1px 0 rgba(255,255,255,0.8),
+        inset -1px -1px 0 rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.stat-label {
+    font-size: 11px;
+    color: #666;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+}
+
+.stat-value {
+    font-size: 24px;
+    font-weight: bold;
+    color: #0078d7;
+}
+
+.stat-sublabel {
+    font-size: 10px;
+    color: #999;
+    margin-top: 2px;
+}
+
+.graph-panel {
+    background: linear-gradient(to bottom, #f5f5f5, #f0f0f0);
+    border: 1px solid #999;
+    padding: 8px;
+    box-shadow:
+        inset 1px 1px 0 rgba(255,255,255,0.8),
+        inset -1px -1px 0 rgba(0,0,0,0.1);
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.graph-title {
+    font-size: 12px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 6px;
+}
+
+.graph-content {
+    flex: 1;
+    background: white;
+    border: 1px solid #d0d0d0;
+    border-radius: 2px;
+    padding: 4px;
+    overflow: hidden;
+}
+
+.chart-canvas {
+    width: 100%;
+    height: 100%;
+}
+
+/* ============================================================================
+   Suggestions & Patterns
+   ============================================================================ */
+
+.suggestion-item {
+    background: linear-gradient(to right, #fff9e6, #fff5d0);
+    border-left: 4px solid #ffaa00;
+    padding: 8px;
+    margin-bottom: 6px;
+    border-radius: 2px;
+    font-size: 11px;
+}
+
+.suggestion-title {
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 3px;
+}
+
+.suggestion-description {
+    color: #666;
+    font-size: 10px;
+    margin-bottom: 3px;
+}
+
+.suggestion-impact {
+    display: flex;
+    gap: 6px;
+    font-size: 10px;
+}
+
+.impact-badge {
+    background: #0078d7;
+    color: white;
+    padding: 2px 4px;
+    border-radius: 2px;
+    text-transform: uppercase;
+}
+
+.impact-badge.high {
+    background: #d9534f;
+}
+
+.impact-badge.medium {
+    background: #ffaa00;
+}
+
+.impact-badge.low {
+    background: #5cb85c;
+}
+
+.pattern-item {
+    background: linear-gradient(to right, #e6f2ff, #d0e8ff);
+    border-left: 4px solid #0078d7;
+    padding: 8px;
+    margin-bottom: 6px;
+    border-radius: 2px;
+    font-size: 11px;
+}
+
+.pattern-type {
+    font-weight: bold;
+    color: #0078d7;
+    margin-bottom: 3px;
+    text-transform: uppercase;
+}
+
+.pattern-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px;
+    font-size: 10px;
+    color: #666;
+}
+
+/* ============================================================================
+   Scrollbars - Windows 7 Style
+   ============================================================================ */
+
+.sidebar::-webkit-scrollbar,
+.panel::-webkit-scrollbar {
+    width: 16px;
+}
+
+.sidebar::-webkit-scrollbar-track,
+.panel::-webkit-scrollbar-track {
+    background: linear-gradient(to bottom, #f5f5f5, #f0f0f0);
+    border: 1px solid #999;
+}
+
+.sidebar::-webkit-scrollbar-thumb,
+.panel::-webkit-scrollbar-thumb {
+    background: linear-gradient(to bottom, #c0c0c0, #a0a0a0);
+    border: 1px solid #666;
+    border-radius: 8px;
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover,
+.panel::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(to bottom, #d3d3d3, #b0b0b0);
+}
+
+/* ============================================================================
+   Animations & Effects
+   ============================================================================ */
+
+@keyframes shimmer {
+    0% { background-position: -1000px 0; }
+    100% { background-position: 1000px 0; }
+}
+
+.loading {
+    background: linear-gradient(to right, #f0f0f0 0%, #ffffff 50%, #f0f0f0 100%);
+    background-size: 1000px 100%;
+    animation: shimmer 2s infinite;
+}
+
+.alert-box {
+    background: linear-gradient(to bottom, #fef5e6, #fdf0d0);
+    border: 1px solid #ffaa00;
+    border-radius: 3px;
+    padding: 8px;
+    margin-bottom: 6px;
+    font-size: 11px;
+    color: #333;
+}
+
+.alert-box.error {
+    background: linear-gradient(to bottom, #ffe6e6, #ffd0d0);
+    border-color: #ff3333;
+}
+
+.alert-box.success {
+    background: linear-gradient(to bottom, #e6f9e6, #d0f5d0);
+    border-color: #00aa00;
+}
+
+/* ============================================================================
+   Responsive - Still Windows 7 but Adaptive
+   ============================================================================ */
+
+@media (max-width: 1200px) {
+    .top-panels {
+        grid-template-columns: repeat(2, 1fr);
+        height: 160px;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-content {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        height: 100px;
+        display: flex;
+        overflow-x: auto;
+    }
+
+    .sidebar-item {
+        flex-shrink: 0;
+        border-bottom: none;
+        border-right: 1px solid #d0d0d0;
+    }
+
+    .top-panels {
+        grid-template-columns: repeat(2, 1fr);
+        height: 160px;
+    }
+}
