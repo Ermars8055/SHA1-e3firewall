@@ -1,0 +1,76 @@
+{
+  "metadata": {
+    "date": "2025-09-16T12:32:53.226494",
+    "data_size_mb": 100,
+    "hash_function": "SHA1-E3 Enhanced",
+    "version": "2.0.0"
+  },
+  "nist_sts": {
+    "monobit": {
+      "statistic": 1.414213562373095,
+      "p_value": 0.15729920705028516,
+      "success": true,
+      "ones_ratio": 0.50625
+    },
+    "block_frequency": {
+      "statistic": 201.5,
+      "p_value": 1.757239464727628e-44,
+      "success": false,
+      "block_size": 128
+    },
+    "runs": {
+      "statistic": 12767,
+      "p_value": 0.6983412632027461,
+      "success": true,
+      "runs": 12767
+    },
+    "longest_run": {
+      "statistic": 1671.3376447353135,
+      "p_value": 0.0,
+      "success": false,
+      "longest_run": 13
+    },
+    "matrix_rank": {
+      "statistic": 61.56509695290859,
+      "p_value": 4.278672617794867e-14,
+      "success": false,
+      "full_rank_matrices": 25,
+      "rank_minus_1_matrices": 0
+    },
+    "spectral": {
+      "statistic": 0.7456011350793257,
+      "p_value": 0.45590839703156644,
+      "success": true,
+      "threshold": 276.9309412163656,
+      "below_threshold": 12173
+    },
+    "non_overlapping": {
+      "statistic": 0.6869343199608611,
+      "p_value": 0.7093067744102973,
+      "success": true,
+      "template": "010110101",
+      "mean_occurrences": 15.666666666666666
+    },
+    "overlapping": {
+      "statistic": 126.97790322232949,
+      "p_value": 2.673613672316153e-28,
+      "success": false,
+      "template": "111111111",
+      "mean_occurrences": 1.7083333333333333
+    },
+    "universal": {
+      "statistic": 13.218508207075264,
+      "p_value": 5.561421377885229e-78,
+      "success": false,
+      "phi": 6.1647917578882145,
+      "expected_value": 6.1962507
+    },
+    "entropy": {
+      "statistic": 1038.0613038786066,
+      "p_value": 3.871256290963424e-226,
+      "success": false,
+      "entropy_m": -6.911877773439494,
+      "entropy_m1": -7.5847503191580605
+    },
+    "cumulative_sums": {
+      "forward_statistic": 

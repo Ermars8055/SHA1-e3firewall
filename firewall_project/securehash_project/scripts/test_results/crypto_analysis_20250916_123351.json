@@ -1,0 +1,163 @@
+{
+  "metadata": {
+    "date": "2025-09-16T12:33:50.506194",
+    "data_size_mb": 100,
+    "hash_function": "SHA1-E3 Enhanced",
+    "version": "2.0.0"
+  },
+  "nist_sts": {
+    "monobit": {
+      "statistic": 0.5568465901844062,
+      "p_value": 0.577632248681804,
+      "success": true,
+      "ones_ratio": 0.4975390625
+    },
+    "block_frequency": {
+      "statistic": 217.59375,
+      "p_value": 5.624935400754305e-48,
+      "success": false,
+      "block_size": 128
+    },
+    "runs": {
+      "statistic": 12745,
+      "p_value": 0.49420215048423227,
+      "success": true,
+      "runs": 12745
+    },
+    "longest_run": {
+      "statistic": 1584.5387153543106,
+      "p_value": 0.0,
+      "success": false,
+      "longest_run": 12
+    },
+    "matrix_rank": {
+      "statistic": 61.56509695290859,
+      "p_value": 4.278672617794867e-14,
+      "success": false,
+      "full_rank_matrices": 25,
+      "rank_minus_1_matrices": 0
+    },
+    "spectral": {
+      "statistic": 1.4912022701586514,
+      "p_value": 0.13590839784737055,
+      "success": true,
+      "threshold": 276.9309412163656,
+      "below_threshold": 12186
+    },
+    "non_overlapping": {
+      "statistic": 5.684977372798435,
+      "p_value": 0.05828044358568288,
+      "success": true,
+      "template": "101001101",
+      "mean_occurrences": 13.666666666666666
+    },
+    "overlapping": {
+      "statistic": 314.3730906841821,
+      "p_value": 5.429386121901769e-69,
+      "success": false,
+      "template": "111111111",
+      "mean_occurrences": 2.125
+    },
+    "universal": {
+      "statistic": 19.872404300830993,
+      "p_value": 8.796855876604868e-174,
+      "success": false,
+      "phi": 6.148956042635622,
+      "expected_value": 6.1962507
+    },
+    "entropy": {
+      "statistic": 1067.1673850144032,
+      "p_value": 1.8515980321983886e-232,
+      "success": false,
+      "entropy_m": -6.909291217459505,
+      "entropy_m1": -7.581595285030888
+    },
+    "cumulative_sums": {
+      "forward_statistic": 193,
+      "backward_statistic": 199,
+      "forward_p_value": 0.9564444875329726,
+      "backward_p_value": 0.9583627173856663,
+      "success": true
+    },
+    "random_excursions": {
+      "error": "Insufficient number of cycles",
+      "success": false,
+      "cycles": 65
+    }
+  },
+  "dieharder": {
+    "birthdays": {
+      "statistic": 0,
+      "p_value": 1.0,
+      "success": true
+    },
+    "operm5": {
+      "statistic": 0,
+      "p_value": 1.0,
+      "success": true
+    },
+    "binary_rank": {
+      "statistic": 0,
+      "p_value": 1.0,
+      "success": true
+    },
+    "count_1s": {
+      "statistic": 0,
+      "p_value": 1.0,
+      "success": true
+    },
+    "parking_lot": {
+      "statistic": 0,
+      "p_value": 1.0,
+      "success": true
+    },
+    "minimum_distance": {
+      "statistic": 0,
+      "p_value": 1.0,
+      "success": true
+    },
+    "spheres": {
+      "statistic": 0,
+      "p_value": 1.0,
+      "success": true
+    },
+    "squeeze": {
+      "statistic": 0,
+      "p_value": 1.0,
+      "success": true
+    },
+    "runs": {
+      "statistic": 0,
+      "p_value": 1.0,
+      "success": true
+    },
+    "craps": {
+      "statistic": 0,
+      "p_value": 1.0,
+      "success": true
+    }
+  },
+  "testu01": {
+    "smallcrush": {
+      "statistic": 0,
+      "p_value": 1.0,
+      "success": true
+    },
+    "rabbit": {
+      "statistic": 0,
+      "p_value": 1.0,
+      "success": true
+    },
+    "alphabit": {
+      "statistic": 0,
+      "p_value": 1.0,
+      "success": true
+    }
+  },
+  "summary": {
+    "nist_pass_rate": 0.4166666666666667,
+    "dieharder_pass_rate": 1.0,
+    "testu01_pass_rate": 1.0,
+    "overall_success": false
+  }
+}
