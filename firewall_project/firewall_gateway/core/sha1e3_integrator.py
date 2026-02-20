@@ -50,10 +50,10 @@ class SHA1E3Integrator:
         """Initialize SHA1-E3 from storage module."""
         try:
             # Add securehash_project to path
-            # From: /Users/admin/Desktop/SHA10-Test/firewall_project/firewall_gateway/core/sha1e3_integrator.py
-            # Need: /Users/admin/Desktop/SHA10-Test/securehash_project
-            current_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))  # SHA10-Test
-            securehash_path = os.path.join(current_dir, 'securehash_project')
+            # From: firewall_project/firewall_gateway/core/sha1e3_integrator.py
+            # Need: firewall_project/securehash_project (sibling directory)
+            firewall_root = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))  # firewall_project
+            securehash_path = os.path.join(firewall_root, 'securehash_project')
             sys.path.insert(0, securehash_path)
             from storage.utils.sha1_enhanced_v3 import enhanced_sha1_with_content
             self.hash_function = enhanced_sha1_with_content

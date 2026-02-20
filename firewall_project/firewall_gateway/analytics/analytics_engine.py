@@ -490,9 +490,10 @@ class AnalyticsEngine:
             # Try to import SHA1-E3 from securehash_project
             import sys
             import os
-            project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../..'))
-            if project_root not in sys.path:
-                sys.path.insert(0, project_root)
+            # Get firewall_project root (3 levels up from analytics_engine.py)
+            firewall_root = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
+            if firewall_root not in sys.path:
+                sys.path.insert(0, firewall_root)
 
             from securehash_project.storage.utils.sha1_sponge_collatz_enhanced import enhanced_sha1_signature
 
